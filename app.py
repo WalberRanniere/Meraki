@@ -131,9 +131,9 @@ if st.button("Calcular"):
         if sobra_altura > 0 and sobra_largura > 0:
             st.write(f"📏 Sobra no papelão: **100 x {sobra_largura} cm** na vertical e **{sobra_altura} x 80 cm** na horizontal")
         elif sobra_altura <= 0 and sobra_largura > 0:
-            st.write(f"📏 Sobra no papelão: **{sobra_largura} x 100 cm** na horizontal")
+            st.write(f"📏 Sobra no papelão: **100 x {sobra_largura} cm** ")
         elif sobra_altura > 0 and sobra_largura <= 0:
-            st.write(f"📏 Sobra no papelão: **100 x {sobra_altura} cm** na vertical")
+            st.write(f"📏 Sobra no papelão: **{sobra_altura} x 80 cm** ")
         else:
             st.write("📏 Não há sobra no papelão.")
 
