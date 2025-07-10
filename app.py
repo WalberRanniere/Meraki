@@ -129,9 +129,9 @@ if st.button("Calcular"):
         st.success(f"✅ Melhor orientação: {orientacao}")
         st.write(f"➡️ Caixas por papelão: `{alt} x {larg}` = **{total_por_papelao} caixas**")
         if sobra_altura > 0 and sobra_largura > 0:
-            st.write(f"📏 Sobra no papelão: **100 x {sobra_altura} cm** na vertical e **{sobra_largura} x 80 cm** na horizontal")
+            st.write(f"📏 Sobra no papelão: **100 x {sobra_largura} cm** na vertical e **{sobra_altura} x 80 cm** na horizontal")
         elif sobra_altura <= 0 and sobra_largura > 0:
-            st.write(f"📏 Sobra no papelão: **{sobra_largura} x 80 cm** na horizontal")
+            st.write(f"📏 Sobra no papelão: **{sobra_largura} x 100 cm** na horizontal")
         elif sobra_altura > 0 and sobra_largura <= 0:
             st.write(f"📏 Sobra no papelão: **100 x {sobra_altura} cm** na vertical")
         else:
