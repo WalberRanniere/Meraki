@@ -4,7 +4,7 @@ import streamlit as st
 import math
 
 class Caixa:
-    def __init__(self, altura: int, largura: int, profundidade: int):
+    def __init__(self, altura: float, largura: float, profundidade: float):
         self.altura = altura
         self.largura = largura
         self.profundidade = profundidade
@@ -15,7 +15,7 @@ class Caixa:
         return (self.altura_real, self.largura_real)
 
 class Papelão:
-    def __init__(self, altura: int = 100, largura: int = 80):
+    def __init__(self, altura: float = 100.0, largura: float = 80.0):
         self.altura = altura
         self.largura = largura
 
@@ -108,14 +108,27 @@ def calcular_lombadas_fundos_e_tampas_por_papelao(caixa: Caixa, papelao: Papelã
 # Interface Streamlit
 st.title("🧮 Calculadora de Caixas no Papelão - Meraki")
 
-altura = st.number_input("Altura da caixa (cm):", min_value=1)
-largura = st.number_input("Largura da caixa (cm):", min_value=1)
-profundidade = st.number_input("Profundidade da caixa (cm):", min_value=0)
+with st.sidebar.expander("📐 Papelão"):
+    altura_papelao = st.number_input("Altura do papelão (cm):", min_value=10.0, value=100.0, step=0.5, format="%.1f")
+    largura_papelao = st.number_input("Largura do papelão (cm):", min_value=10.0, value=80.0, step=0.5, format="%.1f")
+    
+papelao = Papelão(altura_papelao, largura_papelao)
+
+st.sidebar.markdown("---")
+st.sidebar.markdown("📝 **Instruções:**")
+st.sidebar.markdown("1. Preencha as medidas da caixa.")
+st.sidebar.markdown("2. Clique em 'Calcular' para ver quantas caixas cabem no papelão.")
+st.sidebar.markdown("3. Confira as sobras e quantos papelões são necessários.")
+
+st.subheader("📦 Medidas da Caixa")
+
+altura = st.number_input("Altura da caixa (cm):", min_value=1.0, step=0.1, format="%.1f")
+largura = st.number_input("Largura da caixa (cm):", min_value=1.0, step=0.1, format="%.1f")
+profundidade = st.number_input("Profundidade da caixa (cm):", min_value=0.0, step=0.1, format="%.1f")
 qtd_caixas_desejada = st.number_input("Quantas caixas deseja fazer?", min_value=1, step=1)
 
 if st.button("Calcular"):
     caixa = Caixa(altura, largura, profundidade)
-    papelao = Papelão()
 
     base = caixa.medida_real()
     st.write(f"📦 Medida real da base da caixa: `{base[0]} x {base[1]} cm`")
@@ -139,7 +152,6 @@ if st.button("Calcular"):
 
         papelões_necessarios = math.ceil(qtd_caixas_desejada / total_por_papelao)
         st.info(f"📦 Para produzir **{qtd_caixas_desejada} caixas**, serão necessários **{papelões_necessarios} papelões**.")
-        """ st.balloons()  # Animação de balões para celebrar o sucesso """
 
     st.subheader("📚 Lombadas, Fundos e Tampas")
 
